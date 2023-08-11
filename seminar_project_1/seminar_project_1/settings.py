@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'bike_app',
 	'game_app',
+	'practice_2',
 ]
 
 MIDDLEWARE = [
