@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+  <h2>Статьи автора {{ author }}</h2>
+    <ul>
+    {% for i in articles %}
+        {% if i.publish %}
+        <li><a href="{% url 'article' i.id %}">{{ i.title }} </a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+</body>
+</html>
