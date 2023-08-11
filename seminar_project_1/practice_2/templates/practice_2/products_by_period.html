@@ -1,0 +1,20 @@
+{% extends 'practice_2/base.html' %}
+
+{% block title %}Orders by client {% endblock %}
+{% block content %}
+<h3>Список товаров, заказaнных клиентом: {{ client }} за
+    {% if period == 31 %}
+    {{ period }} день
+    {% elif period == -1 %}
+    за всю историю покупок
+    {% else %}
+    {{ period }} дней
+    {% endif %}
+</h3>
+<ol>
+    {% for i in products %}
+    <li> Товар:{{ i.name }}, стоимость товара {{ i.price }}.
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}

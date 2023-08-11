@@ -1,0 +1,17 @@
+{% extends 'practice_2/base.html' %}
+
+{% block title %}Orders by client {% endblock %}
+{% block content %}
+<h3>Список заказов клиента {{ client }}</h3>
+<ol>
+    {% for i in orders %}
+    <li> Номер заказа:{{ i.order.pk }},сумма заказа {{ i.order.total_sum }}, дата оформления: {{ i.order.order_date }}.
+        {% for j in i.prod %}
+        <ul>
+            Товары: {{ j.name }} цена: {{ j.price }}
+        </ul>
+        {% endfor %}
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}

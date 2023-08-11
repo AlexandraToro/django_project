@@ -1,0 +1,11 @@
+{% extends 'game_app/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+  <h2>Сторона куба</h2>
+    <ol>
+    {% for item in my_list %}
+        <li>{{ item }}</li>
+    {% endfor %}
+    </ol>
+{% endblock %}
