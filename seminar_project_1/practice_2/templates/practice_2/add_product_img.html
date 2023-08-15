@@ -1,7 +1,7 @@
-{% extends 'game_app/base.html' %}
+{% extends 'practice_2/base.html' %}
 {% block content %}
-<h3>{{ message }}</h3>
-<form action="" method="post">
+<h3>{{ title }}</h3>
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Отправить">

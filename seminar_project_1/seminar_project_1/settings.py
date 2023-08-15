@@ -114,6 +114,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -157,6 +160,10 @@ LOGGING = {
 			'level': 'INFO',
 			'propagate': True,
 		},
-		
+		'practice_2': {
+			'handlers': ['console', 'file'],
+			'level': 'INFO',
+			'propagate': True,
+		},
 	},
 }
