@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.files.storage import FileSystemStorage
 from practice_2.models import Client, Order, Product
 from datetime import datetime,timedelta
+from .forms import ProductForm,ProductImageForm
 
 
 def all_orders_by_client(request, pk_client):
@@ -52,3 +54,31 @@ def products_by_period(request, pk_client, period):
 			'client': client,
 		}
 	return render(request, 'practice_2/products_by_period.html', context=context)
+
+
+def update_product_data(request, product_pk):
+	product = get_object_or_404(Product, pk=product_pk)
+	if request.method == 'POST':
+		form = ProductForm(request.POST)
+		if form.is_valid():
+			product.name = form.cleaned_data['name']
+			product.description = form.cleaned_data['description']
+			product.price = form.cleaned_data['price']
+			product.count = form.cleaned_data['count']
+			product.save()
+	else:
+		form = ProductForm()
+	return render(request, "practice_2/update_product.html", {'form': form, 'title': f'Update data of product {product.pk}'})
+
+
+def add_product_img(request, product_pk):
+	product = get_object_or_404(Product, pk=product_pk)
+	if request.method == 'POST':
+		form = ProductImageForm(request.POST, request.FILES)
+		if form.is_valid():
+			product.image = form.cleaned_data['image']
+			product.save()
+	else:
+		form = ProductImageForm()
+	return render(request, "practice_2/add_product_img.html",
+	              {'form': form, 'title': f'Add image to product'})

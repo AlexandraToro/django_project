@@ -1,27 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-<h2>Статья автора </h2>
-<p>
-    Author: {{ article.author.fullname }}
-    Date: {{ article.time }}
+{% extends 'game_app/base.html' %}
 
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div>
+    <h4>{{ author.name }} {{ author.surname }}</h4>
+    <h3>Article: {{ article.title }}</h3>
     {{ article.content }}
-</p>
-<h3>Comments</h3>
-<ul>
-    {% for i in comments %}
-    <li> {{ comment.author.full_name }}</li>
-    <li> {{ comment.date_update }}   </li>
-    <li> {{ comment.text}}   </li>
-    {% if comment.date_update != comment.date_create %}
-    <li>Changed</li>
-    {% endif %}
-    {% endfor %}
-</ul>
-</body>
-</html>
+    <ul>Commentaries:
+        {% for comment in commentaries %}
+        <li>{{ comment.author.name }}
+            {{ comment.author.surname }}:
+            {{ comment.text }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <input type="submit" value="{{ button }}">
+    </form>
+</div>
+<footer>
+    <a href="">Main</a>&nbsp;&nbsp;&nbsp;
+    <a href="about/">About</a>
+</footer>
+{% endblock %}
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>{{ title }}</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Статья автора </h2>-->
+<!--<p>-->
+<!--    Author: {{ article.author.fullname }}-->
+<!--    Date: {{ article.time }}-->
+
+<!--    {{ article.content }}-->
+<!--</p>-->
+<!--<h3>Comments</h3>-->
+<!--<ul>-->
+<!--    {% for i in comments %}-->
+<!--    <li> {{ comment.author.full_name }}</li>-->
+<!--    <li> {{ comment.date_update }}   </li>-->
+<!--    <li> {{ comment.text}}   </li>-->
+<!--    {% if comment.date_update != comment.date_create %}-->
+<!--    <li>Changed</li>-->
+<!--    {% endif %}-->
+<!--    {% endfor %}-->
+<!--</ul>-->
+<!--</body>-->
+<!--</html>-->
