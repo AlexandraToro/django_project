@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,15 +20,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=fr(7!l#*id&mo0^r(t)0zjb5kqr6u!xet3bg7x!ourxw7vc^z'
-
+# SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = []
 
 # Application definition
 INTERNAL_IPS = [
 	'127.0.0.1',
+	'otomi.pythonanywhere.com',
 ]
 
 INSTALLED_APPS = [
@@ -78,13 +82,25 @@ WSGI_APPLICATION = 'seminar_project_1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.sqlite3',
+# 		'NAME': BASE_DIR / 'db.sqlite3',
+# 	}
+# }
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': BASE_DIR / 'db.sqlite3',
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'Otomi$default',
+		'USER': 'Otomi',
+		'PASSWORD': 'adminadmin123',
+		# 'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+		'HOST': 'Otomi.mysql.pythonanywhere-services.com',
+		'OPTIONS': {
+			'init_command': "SET NAMES 'utf8mb4';SET sql_mode = 'STRICT_TRANS_TABLES'", 'charset': 'utf8mb4',
+		},
 	}
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -118,6 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static/'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
